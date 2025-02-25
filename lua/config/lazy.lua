@@ -52,27 +52,6 @@ require("lazy").setup({
                 vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit" })
             end,
         },
-        {
-            "jose-elias-alvarez/null-ls.nvim",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            config = function()
-                require("null-ls").setup({
-                    sources = {
-                        require("null-ls").builtins.formatting.shfmt,
-                        require("null-ls").builtins.formatting.stylua,
-                        require("null-ls").builtins.formatting.prettier.with({
-                            filetypes = { "html", "css", "javascript", "typescript", "json" },
-                        }),
-                    },
-                })
-            end,
-            {
-                "olrtg/nvim-emmet",
-                config = function()
-                    vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
-                end,
-            },
-        },
     },
     defaults = {
         -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

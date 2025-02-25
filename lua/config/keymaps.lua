@@ -107,3 +107,7 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 
 vim.keymap.set("n", "<leader>qq", ":qa!<CR>", { desc = "Quit all and exit nvim" })
 
+-- Switch between linter errors in a file
+vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "Go to next error" })
+vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Go to previous error" })
+

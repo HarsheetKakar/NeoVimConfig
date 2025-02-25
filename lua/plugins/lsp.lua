@@ -113,5 +113,34 @@ return {
             })
         end,
     }, --},
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("null-ls").setup({
+                sources = {
+                    require("null-ls").builtins.formatting.shfmt,
+                    require("null-ls").builtins.formatting.stylua,
+                    require("null-ls").builtins.formatting.prettier.with({
+                        filetypes = {
+                            "javascript",
+                            "javascriptreact",
+                            "typescript",
+                            "typescriptreact",
+                            "html",
+                            "css",
+                            "json",
+                        },
+                    }),
+                },
+            })
+        end,
+        {
+            "olrtg/nvim-emmet",
+            config = function()
+                vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+            end,
+        },
+    },
 }
 
