@@ -13,6 +13,10 @@ return {
             require("mini.comment").setup() -- Comment lines (integrates well with LazyVim)
             require("mini.move").setup() -- Move any selection in any direction
             require("mini.surround").setup() -- Surround actions (better than alternatives)
+            require("mini.tabline").setup({
+                set_vim_setting = true,
+                show_icons = false,
+            })
 
             -- APPEARANCE MODULES
             -- require("mini.animate").setup() -- Animate common Neovim actions

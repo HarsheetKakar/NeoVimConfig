@@ -111,3 +111,6 @@ vim.keymap.set("n", "<leader>qq", ":qa!<CR>", { desc = "Quit all and exit nvim" 
 vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "Go to next error" })
 vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Go to previous error" })
 
+-- Diagnostics toggle
+vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Toggle diagnostics globally" })
+

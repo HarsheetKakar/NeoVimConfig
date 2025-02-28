@@ -22,9 +22,9 @@ return {
                     "bashls", -- for Bash
                     "gopls", -- for Go
                     "lua_ls", -- for Lua
-                    "ts_ls", -- for TypeScript/JavaScript
+                    "ts_ls", -- for JavaScript/React/TypeScript
                     "html", -- for HTML
-                    -- "emmet_language_server", -- optionally, for Emmet support
+                    "emmet_language_server", -- optionally, for Emmet support via LSP
                 },
                 automatic_installation = true,
             })
@@ -41,8 +41,8 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local on_attach = function(client, bufnr)
-                -- Disable formatting for tsserver if using an external formatter (e.g., via null-ls)
-                if client.name == "tsserver" then
+                -- Disable formatting for ts_ls if using an external formatter (null-ls)
+                if client.name == "ts_ls" then
                     client.server_capabilities.documentFormattingProvider = false
                 end
                 -- Additional on_attach logic (keymaps, etc.) can be added here.
@@ -73,9 +73,15 @@ return {
                 },
             })
 
-            lspconfig.tsserver.setup({
+            lspconfig.ts_ls.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "typescript",
+                    "typescriptreact",
+                },
             })
 
             lspconfig.html.setup({
@@ -85,34 +91,7 @@ return {
         end,
     },
 
-    -- null-ls for formatters (shfmt, stylua, and htmlbeautifier)
-    -- Uncomment this section if you want to use null-ls for formatting.
-    --{
-    --    "jose-elias-alvarez/null-ls.nvim",
-    --    dependencies = { "nvim-lua/plenary.nvim" },
-    --    config = function()
-    --        local null_ls = require("null-ls")
-    --        null_ls.setup({
-    --            sources = {
-    --                null_ls.builtins.formatting.shfmt,
-    --                null_ls.builtins.formatting.stylua,
-    --                null_ls.builtins.formatting.htmlbeautifier,
-    --            },
-    --        })
-    --    end,
-    {
-        "SmiteshP/nvim-navic",
-        dependencies = "neovim/nvim-lspconfig",
-        config = function()
-            require("nvim-navic").setup({
-                highlight = true,
-                separator = " > ",
-                depth_limit = 0,
-                depth_limit_indicator = "..",
-                safe_output = true,
-            })
-        end,
-    }, --},
+    -- null-ls for formatters (shfmt, stylua, and Prettier for JS/React)
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -135,12 +114,29 @@ return {
                 },
             })
         end,
-        {
-            "olrtg/nvim-emmet",
-            config = function()
-                vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
-            end,
-        },
+    },
+
+    -- nvim-navic for code context (breadcrumbs)
+    {
+        "SmiteshP/nvim-navic",
+        dependencies = "neovim/nvim-lspconfig",
+        config = function()
+            require("nvim-navic").setup({
+                highlight = true,
+                separator = " > ",
+                depth_limit = 0,
+                depth_limit_indicator = "..",
+                safe_output = true,
+            })
+        end,
+    },
+
+    -- nvim-emmet for Emmet abbreviation expansion
+    {
+        "olrtg/nvim-emmet",
+        config = function()
+            vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+        end,
     },
 }
 
