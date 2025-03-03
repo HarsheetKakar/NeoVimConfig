@@ -25,6 +25,7 @@ return {
                     "ts_ls", -- for JavaScript/React/TypeScript
                     "html", -- for HTML
                     "emmet_language_server", -- optionally, for Emmet support via LSP
+                    -- Remove angular-language-server here if you prefer to configure Angular LS manually
                 },
                 automatic_installation = true,
             })
@@ -48,16 +49,19 @@ return {
                 -- Additional on_attach logic (keymaps, etc.) can be added here.
             end
 
+            -- Bash
             lspconfig.bashls.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
             })
 
+            -- Go
             lspconfig.gopls.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
             })
 
+            -- Lua
             lspconfig.lua_ls.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
@@ -73,6 +77,7 @@ return {
                 },
             })
 
+            -- JavaScript/React/TypeScript via ts_ls
             lspconfig.ts_ls.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
@@ -84,9 +89,19 @@ return {
                 },
             })
 
+            -- HTML
             lspconfig.html.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
+            })
+
+            -- Angular Language Server (configured manually, without Mason)
+            lspconfig.angularls.setup({
+                on_attach = on_attach,
+                cmd = { "ngserver", "--stdio" },
+                filetypes = { "html", "typescript", "typescriptreact", "javascript", "javascriptreact" },
+                root_dir = lspconfig.util.root_pattern("angular.json", ".git"),
+                single_file_support = false,
             })
         end,
     },
@@ -101,6 +116,7 @@ return {
                     require("null-ls").builtins.formatting.shfmt,
                     require("null-ls").builtins.formatting.stylua,
                     require("null-ls").builtins.formatting.prettier.with({
+                        extra_args = { "--tab-width", "4" },
                         filetypes = {
                             "javascript",
                             "javascriptreact",
@@ -135,7 +151,12 @@ return {
     {
         "olrtg/nvim-emmet",
         config = function()
-            vim.keymap.set({ "n", "v" }, "<leader>xe", require("nvim-emmet").wrap_with_abbreviation)
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>xe",
+                require("nvim-emmet").wrap_with_abbreviation,
+                { desc = "Wrap with Emmet abbreviation" }
+            )
         end,
     },
 }
