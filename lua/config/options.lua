@@ -75,3 +75,6 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", { desc = "Remove search high
 -- Custom LSP settings
 vim.lsp.set_log_level("info")
 
+-- removes tabline
+vim.opt.showtabline = 0
+

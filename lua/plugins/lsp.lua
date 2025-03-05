@@ -146,18 +146,5 @@ return {
             })
         end,
     },
-
-    -- nvim-emmet for Emmet abbreviation expansion
-    {
-        "olrtg/nvim-emmet",
-        config = function()
-            vim.keymap.set(
-                { "n", "v" },
-                "<leader>xe",
-                require("nvim-emmet").wrap_with_abbreviation,
-                { desc = "Wrap with Emmet abbreviation" }
-            )
-        end,
-    },
 }
 

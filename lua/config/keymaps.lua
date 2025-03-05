@@ -114,3 +114,6 @@ vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "Go to prev
 -- Diagnostics toggle
 vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Toggle diagnostics globally" })
 
+-- Get type info
+vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
+
