@@ -15,17 +15,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
     end,
 })
 
--- Ensure a blank line at the end of the file
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, true)[1] or ""
-        if last_line:match("^%s*$") == nil then
-            vim.api.nvim_buf_set_lines(0, -1, -1, true, { "" })
-        end
-    end,
-})
-
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.html", "*.css", "*.json" },
     callback = function()

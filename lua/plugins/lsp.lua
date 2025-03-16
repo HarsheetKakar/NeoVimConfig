@@ -25,6 +25,7 @@ return {
                     "ts_ls", -- for JavaScript/React/TypeScript
                     "html", -- for HTML
                     "emmet_language_server", -- optionally, for Emmet support via LSP
+                    "basedpyright",
                     -- Remove angular-language-server here if you prefer to configure Angular LS manually
                 },
                 automatic_installation = true,
@@ -102,6 +103,31 @@ return {
                 filetypes = { "html", "typescript", "typescriptreact", "javascript", "javascriptreact" },
                 root_dir = lspconfig.util.root_pattern("angular.json", ".git"),
                 single_file_support = false,
+            })
+            -- Pyright with basic type checking (BasedPyright)
+            lspconfig.basedpyright.setup({
+                on_attach = on_attach,
+                flags = { debounce_text_changes = 150 },
+                settings = {
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            diagnosticMode = "workspace",
+                            useLibraryCodeForTypes = true,
+                            typeCheckingMode = "basic", -- "basic" mode (less strict than "strict")
+                        },
+                    },
+                    basedpyright = {
+                        analysis = {
+                            inlayHints = {
+                                variableTypes = true, -- Show inlay hints for variable assignments (default true)
+                                callArgumentNames = true, -- Show inlay hints for function arguments (default true)
+                                functionReturnTypes = true, -- Show inlay hints for function return types (default true)
+                                genericTypes = true, -- Show inlay hints for inferred generic types (default false)
+                            },
+                        },
+                    },
+                },
             })
         end,
     },

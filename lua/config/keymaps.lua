@@ -103,9 +103,23 @@ end, { desc = "Go to Harpoon file 4" })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 
--- Close all files and vim
-
-vim.keymap.set("n", "<leader>qq", ":qa!<CR>", { desc = "Quit all and exit nvim" })
+-- Map <leader>qq to call this function
+function _G.confirm_quit_all()
+    -- Get all buffers
+    local bufs = vim.api.nvim_list_bufs()
+    -- Loop through buffers to find an unsaved one
+    for _, bufnr in ipairs(bufs) do
+        local info = vim.fn.getbufinfo(bufnr)[1]
+        if info and info.changed == 1 and info.name ~= "" then
+            -- Switch to the unsaved buffer to bring it into view
+            vim.api.nvim_set_current_buf(bufnr)
+            break
+        end
+    end
+    -- Use the built-in confirm command, which will prompt for confirmation
+    vim.cmd("confirm qa")
+end
+vim.keymap.set("n", "<leader>qq", confirm_quit_all, { desc = "Quit all (confirm unsaved buffers)" })
 
 -- Switch between linter errors in a file
 vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "Go to next error" })
