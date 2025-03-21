@@ -1,5 +1,5 @@
 return {
     -- disable trouble
-    { "akinsho/bufferline.nvim", enabled = false },
+    -- { "akinsho/bufferline.nvim", enabled = false },
 }
 

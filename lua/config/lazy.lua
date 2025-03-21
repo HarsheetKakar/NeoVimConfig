@@ -84,3 +84,9 @@ require("lazy").setup({
     },
 })
 
+require("bufferline").setup({
+    options = {
+        close_command = ":Bdelete",
+    },
+})
+

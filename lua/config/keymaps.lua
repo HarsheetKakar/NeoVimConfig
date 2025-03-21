@@ -131,3 +131,6 @@ vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Toggle dia
 -- Get type info
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
 
+-- Rename a variable in scope
+vim.api.nvim_set_keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
+
