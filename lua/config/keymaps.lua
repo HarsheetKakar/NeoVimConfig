@@ -1,4 +1,4 @@
---  FilePath: nvim/lua/config/keymaps.lua
+--  FilePath: nvim/lua/config/keymaps.luakey
 
 -- Add custom keymaps under <leader>z for all your configurations
 
