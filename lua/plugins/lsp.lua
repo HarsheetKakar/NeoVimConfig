@@ -24,7 +24,6 @@ return {
                     "lua_ls", -- for Lua
                     "ts_ls", -- for JavaScript/React/TypeScript
                     "html", -- for HTML
-                    "emmet_language_server", -- optionally, for Emmet support via LSP
                     "basedpyright",
                     "volar",
                     -- Remove angular-language-server here if you prefer to configure Angular LS manually
@@ -54,7 +53,7 @@ return {
             lspconfig.volar.setup({
                 on_attach = on_attach,
                 flags = { debounce_text_changes = 150 },
-                filetypes = { "vue", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+                filetypes = { "vue", "javascript", "javascriptreact" },
                 -- additional settings if needed
             })
             -- Bash
@@ -125,7 +124,7 @@ return {
             lspconfig.angularls.setup({
                 on_attach = on_attach,
                 cmd = { "ngserver", "--stdio" },
-                filetypes = { "html", "typescript", "typescriptreact", "javascript", "javascriptreact" },
+                filetypes = { "html", "javascript", "javascriptreact" },
                 root_dir = lspconfig.util.root_pattern("angular.json", ".git"),
                 single_file_support = false,
             })
