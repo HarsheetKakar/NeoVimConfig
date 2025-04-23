@@ -8,12 +8,6 @@
 --
 -- End of line addition
 -- Force 'noendofline' globally
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
-    pattern = "*",
-    callback = function()
-        vim.opt.endofline = false
-    end,
-})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.html", "*.css", "*.json" },
