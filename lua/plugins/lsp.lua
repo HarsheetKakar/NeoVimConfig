@@ -25,7 +25,6 @@ return {
                     "ts_ls", -- for JavaScript/React/TypeScript
                     "html", -- for HTML
                     "basedpyright",
-                    "volar",
                     -- Remove angular-language-server here if you prefer to configure Angular LS manually
                 },
                 automatic_installation = true,
@@ -49,13 +48,6 @@ return {
                 end
                 -- Additional on_attach logic (keymaps, etc.) can be added here.
             end
-            -- Vue
-            lspconfig.volar.setup({
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-                filetypes = { "vue", "javascript", "javascriptreact" },
-                -- additional settings if needed
-            })
             -- Bash
             lspconfig.bashls.setup({
                 on_attach = on_attach,
@@ -197,4 +189,3 @@ return {
         end,
     },
 }
-
