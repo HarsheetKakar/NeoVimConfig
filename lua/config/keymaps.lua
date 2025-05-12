@@ -134,3 +134,5 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
 -- Rename a variable in scope
 vim.api.nvim_set_keymap("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
 
+-- Save without format
+vim.keymap.set("n", "<leader>sf", "<cmd>noautocmd write<CR>", { desc = "Save (skip format on save)" })
